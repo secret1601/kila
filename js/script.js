@@ -1,61 +1,69 @@
 window.onload = function () {
     //  aos 관련
-    AOS.init({  
+    AOS.init({
         // once: true              
     });
-   
+
+    // 1. 모달창 생성
+    let modal = $('.modal');
+    let modal_close = $('.modal-close');
+
+    modal_close.click(function () {
+        modal.fadeOut(500);
+    });
+
     // 스크롤시 애니메이션    
-    $(".customer-box-cont").each(function(index, el) {
+    $(".customer-box-cont").each(function (index, el) {
         new Waypoint({
-          element: el,
-          handler: function(direction) {     
-            var element = $(this.element);
-            var delay = element.attr('data-delay');
-            setTimeout(function() {
-                if(direction == "down") {
-                    element.addClass('slideUp');
-                    element.addClass('effect-op-active');
-                }else{
-                    element.removeClass('slideUp');
-                    element.removeClass('effect-op-active');
-                }
-
-            }, delay);
-
-            // this.destroy();
-
-
-          },
-          offset: '90%'
-        });    
-
-      }); 
-
-      $(".partner-link").each(function(index, el) {
-          new Waypoint({
             element: el,
-            handler: function(direction) {            
-              var element = $(this.element);
-              var delay = element.attr('data-delay');
-              setTimeout(function() {
-                
-                if(direction == "down") {
-                    element.addClass('slideUp');
-                    element.addClass('effect-op-active');
-                }else{
-                    element.removeClass('slideUp');
-                    element.removeClass('effect-op-active');
-                }
+            handler: function (direction) {
+                var element = $(this.element);
+                var delay = element.attr('data-delay');
+                setTimeout(function () {
+                    if (direction == "down") {
+                        element.addClass('slideUp');
+                        element.addClass('effect-op-active');
+                    } else {
+                        element.removeClass('slideUp');
+                        element.removeClass('effect-op-active');
+                    }
 
-              }, delay);
+                }, delay);
 
-            //   this.destroy();
+                // this.destroy();
+
 
             },
             offset: '90%'
-          });    
-  
         });
+
+    });
+
+    $(".partner-link").each(function (index, el) {
+        new Waypoint({
+            element: el,
+            handler: function (direction) {
+                var element = $(this.element);
+                var delay = element.attr('data-delay');
+                setTimeout(function () {
+
+                    if (direction == "down") {
+                        element.addClass('slideUp');
+                        element.addClass('effect-op-active');
+                    } else {
+                        element.removeClass('slideUp');
+                        element.removeClass('effect-op-active');
+                    }
+
+                }, delay);
+
+                //   this.destroy();
+
+            },
+            offset: '90%'
+        });
+
+    });
 
 
     // 메뉴기능
@@ -225,13 +233,13 @@ window.onload = function () {
 
 };
 
-$(document).ready(function(){
+$(document).ready(function () {
     // 장면을 저장합니다.
     let section = $('.main > section');
     // 각각의 위치를 저장한다.
     let section_pos = [];
-    
-    $.each(section, function(index, item){
+
+    $.each(section, function (index, item) {
         // 위치값을 파악한다.
         let temp = $(this).offset().top;
         // 정수로 만든다.
@@ -239,7 +247,7 @@ $(document).ready(function(){
         // 각각의 값을 하나씩 저장한다.
         section_pos.push(temp);
     });
-    
+
     // footer 빠진 상태로 저장
     let footer_pos = $('.footer').offset().top;
     footer_pos = parseInt(footer_pos);
@@ -256,12 +264,11 @@ $(document).ready(function(){
 
     // 화면 이동 속도
     let section_speed = 500;
-    
+
     // 윈도우 스크롤 처리
-    $(window).scroll(function(){        
-    });
+    $(window).scroll(function () {});
     // 마우스 휠 처리
-    $(window).bind('mousewheel DOMMouseScroll', function (event){
+    $(window).bind('mousewheel DOMMouseScroll', function (event) {
 
         let distance = event.originalEvent.wheelDelta;
         if (distance == null) {
@@ -269,21 +276,21 @@ $(document).ready(function(){
         }
 
         // 연속으로 휠이 들어온 경우 처리
-        if(section_scroll == 1) {            
+        if (section_scroll == 1) {
             return;
         }
         section_scroll = 1;
 
-        if(distance < 0) {            
+        if (distance < 0) {
             // console.log('화면이 위');
-            section_index ++;
-            if(section_index >= section_total) {
+            section_index++;
+            if (section_index >= section_total) {
                 section_index = section_total - 1;
             }
-        }else{            
+        } else {
             // console.log('화면이 아래');
-            section_index --;
-            if(section_index < 0) {
+            section_index--;
+            if (section_index < 0) {
                 section_index = 0;
             }
         }
@@ -294,8 +301,8 @@ $(document).ready(function(){
 
     // 포커스 유지
     let control_menu = $('.control-menu a');
-    $.each(control_menu, function(index, item){
-        $(this).click(function(e){
+    $.each(control_menu, function (index, item) {
+        $(this).click(function (e) {
             e.preventDefault();
             section_index = index;
             sectionFn();
@@ -311,13 +318,13 @@ $(document).ready(function(){
 
         $('html').animate({
             scrollTop: temp
-        }, section_speed, function(){
+        }, section_speed, function () {
             section_scroll = 0;
-            
+
         });
     }
 
     // 최초 한번 실행
     sectionFn();
-    
+
 });
