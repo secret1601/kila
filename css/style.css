@@ -2,13 +2,6 @@
 @import url('notosanskr/NotoSansKR.css');
 @import url('nanumsquare/nanumsquare.css');
 
-@font-face {
-    font-family: 'GmarketSansMedium';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
 * {
     margin: 0;
     padding: 0;
@@ -38,6 +31,39 @@ button {
 html {
     font-size: 10px;
     overflow-x: hidden;
+}
+
+html {
+    scrollbar-3dLight-Color: #efefef;
+    scrollbar-arrow-color: #dfdfdf;
+    scrollbar-base-color: #efefef;
+    scrollbar-Face-Color: #dfdfdf;
+    scrollbar-Track-Color: #efefef;
+    scrollbar-DarkShadow-Color: #efefef;
+    scrollbar-Highlight-Color: #efefef;
+    scrollbar-Shadow-Color: #efefef;
+    -ms-overflow-style: none;
+    overflow: auto;
+}
+
+/* SCROLL */
+::-webkit-scrollbar {
+    width: 0px;
+}
+
+/* 스크롤바의 width */
+::-webkit-scrollbar-track {
+    background-color: #619ab4;
+}
+
+/* 스크롤바의 전체 배경색 */
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #1697bf, #62b7ac);
+}
+
+/* 스크롤바 색 */
+::-webkit-scrollbar-button {
+    display: none;
 }
 
 body {
@@ -139,96 +165,77 @@ body {
     margin: 0 auto;
 }
 
-.wrap {
+/* 오른쪽 고정 기능 */
+.control {
+    position: fixed;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: block;
+    z-index: 999999;
+}
+
+.control-menu {
     position: relative;
     display: block;
 }
 
-/* 모달창 */
-.modal {
-    position: fixed;
-    left: 0;
-    top: 0;
-
-    display: block;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, .7);
-    z-index: 999999;
-}
-
-.modal-wrap {
+.control-menu::before {
+    content: '';
     position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    right: 15px;
+    top: 15px;
+    width: 1px;
+    height: calc(35px * 4);
+    background-color: #b6b9bc;
+}
+
+.control-menu li {
+    position: relative;
     display: block;
-    width: 400px;
-    height: 280px;
-    background-color: #0fc224;
+    text-align: right;
+    margin-bottom: 5px;
+}
+.control-menu li a {
+    position: relative;
+    display: inline-block;
+    position: relative;
+    padding-left: 17px;
+    padding-right: 26px;
     border-radius: 15px;
-    text-align: center;
+    font-size: 15px;
+    line-height: 30px;
+    color: #646768;
+    -webkit-transition: all 0.4s;
+    transition: all 0.4s;
 }
 
-.modal-txt {
-position: relative;
-display: block;
-color: #fff;
-/* font-weight: bold; */
-font-size: 1.9rem;
-font-family: 'GmarketSansMedium';
-font-weight: 400;
-line-height: 30px;
-padding-top: 60px;
-text-align: center;
+.control-menu li a::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    width: 11px;
+    height: 11px;
+    margin-top: -5px;
+    border-radius: 50%;
+    background: #b6b9bc;
+    -webkit-transition: all 0.4s;
+    transition: all 0.4s;
 }
 
-.modal-txt::before {
-content: '';
-position: absolute;
-left: 50%;
-top: 23px;
-transform: translateX(-50%);
-
-display: block;
-width: 18px;
-height: 17px;
-background: url('../images/modal_sprite.png') no-repeat;
-background-position: 0px -28px;
+.control-active {
+    color: #fff !important;
+    background-color: #d82744 !important;
 }
 
-.modal-txt em {
-position: relative;
-display: block;
-font-size: 1.4rem;
-color: rgb(247, 223, 193);
-padding-top: 10px;
-
+.control-active::after {
+    background-color: #fff !important;
 }
 
-.modal-close {
-position: relative;
-display: inline-block;
-
-font-family: 'GmarketSansMedium';
-color: rgb(247, 223, 193);
-font-size: 1.4rem;
-background-color: #7475c7;
-
-line-height: 20px;
-border: 0;
-border-radius: 5px;
-cursor: pointer;
-padding: 10px 20px;
-text-align: center;
-text-transform: uppercase;
-margin-top: 6px;
-
-transition: background-color 0.4s;
-}
-
-.modal-close:hover {
-background-color: #4c4ec0;
+.wrap {
+    position: relative;
+    display: block;
 }
 
 /* 상단 */
@@ -397,11 +404,11 @@ background-color: #4c4ec0;
 .quick {
     position: fixed;
     right: 20px;
-    top: 100px;
+    top: 20px;
     display: block;
 }
 
-/* 서브메뉴 */
+/*  서브메뉴 */
 .submenu-div {
     position: relative;
     display: block;
@@ -414,11 +421,13 @@ background-color: #4c4ec0;
     z-index: -1;
 }
 
+
 .submenu-div .container {}
 .submenu-box {
     position: relative;
-    display: block;
+    display: none;
 }
+
 
 .submenu-list {
     position: relative;
@@ -473,7 +482,6 @@ background-color: #4c4ec0;
 .submenu-list-sub li a:hover {
     color: #000;
 }
-
 .submenu-list-sub-2x {
     min-height: 180px !important;
 }
@@ -1454,6 +1462,15 @@ background-color: #4c4ec0;
 
 .customer-box-cont:hover {
     background-color: #108ad3 !important;
+}
+
+.effect-op {
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.effect-op-active {
+    opacity: 1;
 }
 
 .customer-link {
