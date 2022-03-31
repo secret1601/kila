@@ -31,7 +31,31 @@ window.onload = function () {
                 }, delay);
 
                 // this.destroy();
+            },
+            offset: '90%'
+        });
 
+    });
+
+    $(".news-bottom").each(function (index, el) {
+        new Waypoint({
+            element: el,
+            handler: function (direction) {
+                var element = $(this.element);
+                var delay = element.attr('data-delay');
+                setTimeout(function () {
+
+                    if (direction == "down") {
+                        element.addClass('slideUp2');
+                        element.addClass('effect-op-active');
+                    } else {
+                        element.removeClass('slideUp2');
+                        element.removeClass('effect-op-active');
+                    }
+
+                }, delay);
+
+                //   this.destroy();
 
             },
             offset: '90%'
@@ -253,6 +277,26 @@ $(document).ready(function () {
     footer_pos = parseInt(footer_pos);
     section_pos.push(footer_pos);
 
+    // 화면이 리사이징 될때 마다 
+    // section_pos 배열을 업데이트 한다.
+    $(window).resize(function(){
+        $.each(section, function(index, item){
+            let temp = $(this).offset().top;
+            temp = parseInt(temp);
+            section_pos[index] = (temp);
+        });
+        
+        footer_pos = $('.footer').offset().top;
+        footer_pos = parseInt(footer_pos);
+        section_pos[section_total-1] = (footer_pos);
+
+        // section_index가 변할 필요가 없다.
+        // 훨을 돌린 것은 아니니까
+        // 위치만 잡아준다.
+        let temp = section_pos[section_index];
+        $('html').scrollTop(temp);
+    });
+
     // 현재 보여지는 페이지 번호
     let section_index = 0;
 
@@ -319,12 +363,65 @@ $(document).ready(function () {
         $('html').animate({
             scrollTop: temp
         }, section_speed, function () {
+
+            // 모션이 완료된 시점
             section_scroll = 0;
+            // 클릭이 가능하도록 처리
+            bt_bool = false;
 
         });
     }
 
     // 최초 한번 실행
     sectionFn();
+
+    // nav 기능 구현
+    let gotop = $('.gotop');
+    let goup = $('.goup');
+    let godown = $('.godown');
+
+    // 연속 버튼 막기
+    bt_bool = false;
+    
+    gotop.click(function(e){
+        e.preventDefault();
+        section_index = 0;
+        sectionFn();
+        // window.scrollTo({
+        //     top: 0,
+        //     behavior: 'smooth'
+        // });
+    })
+    goup.click(function(e){
+        e.preventDefault();
+
+        // 움직이고 있는 동안에는 클릭을 막는다.
+        if(bt_bool == true){
+            return;
+        }
+        bt_bool = true;
+
+        section_index--;
+        if(section_index < 0){
+            section_index = 0;
+        }
+        sectionFn();
+    });
+
+    godown.click(function(event){
+        event.preventDefault();
+
+         // 움직이고 있는 동안에는 클릭을 막는다.
+        if(bt_bool == true){
+            return;
+        }
+        bt_bool = true;
+
+        section_index++;
+        if(section_index >= 6){
+            section_index = 5;
+        }
+        sectionFn();
+    });
 
 });

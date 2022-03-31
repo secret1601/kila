@@ -34,6 +34,9 @@
     <!-- TweenMax -->
     <script src="js/tweenmax/gsap.min.js"></script>
 
+    <!-- font-awsome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+
     <link rel="stylesheet" href="css/style.css">
     <script src="js/script.js"></script>
 </head>
@@ -46,10 +49,12 @@
                 이 사이트는 스터디용으로 제작되었으며<br>
                 모든 리소스는 원저작자에게 있습니다
                 <em>
-                    <b>< REVIEW ></b><br>
-                    페이지 스크롤 기능과 사이드 바 작업을 많이 배웠습니다<br>
-                    자바스크립트로 표현되는 다양한 기능을 잘 알 수 있었고,<br>
-                    코딩에 자신감이 붙는 계기가 된 작업이였습니다.
+                    <b>
+                        < REVIEW>
+                    </b><br>
+                    원사이트에 없는 기능인, 화면이 리사이즈 될때마다<br>
+                    화면 값을 조정하여 풀페이지 기능을 구현하였습니다.<br>
+                    시간이 많이 걸렸지만, 유용한 업무경험을 쌓았다고 생각합니다.
                 </em>
             </span>
             <button class="modal-close">
@@ -69,6 +74,21 @@
             <li><a href="#">모집종사자</a></li>
             <li><a href="#">회원사</a></li>
         </ul>
+
+        <ul class="control-nav">
+            <li>
+                <a href="#" class="goup">
+                    <i class="fas fa-chevron-up"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="godown">
+                    <i class="fas fa-chevron-down"></i>
+                </a>
+            </li>
+            <li><a href="#" class="gotop">top</a></li>
+        </ul>
+
     </div>
 
     <div class="wrap">
@@ -528,7 +548,7 @@
 
                         </div>
                     </div>
-                    <div class="news-bottom clearfix" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+                    <div class="news-bottom clearfix" data-delay="500">
 
                         <div class="notice-wrap mr-20">
 
